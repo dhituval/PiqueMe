@@ -4,69 +4,7 @@
 ////
 ////  Created by Diya Hituvalli on 8/21/24.
 ////
-//
-//import SwiftUI
-//import PhotosUI
-//import UIKit
-//
-//@MainActor
-//final class PhotoPickerViewModel: ObservableObject {
-//    
-//    @Published private(set) var selectedImage: UIImage? = nil
-//    @Published var imageSelection: PhotosPickerItem? = nil {
-//        didSet {
-//            setImage(from: imageSelection)
-//        }
-//    }
-//    
-//    private func setImage(from selection: PhotosPickerItem?) {
-//        guard let selection else { return }
-//        
-//        Task {
-//            if let data = try? await selection.loadTransferable(type: Data.self) {
-//                if let uiImage = UIImage(data: data) {
-//                    selectedImage = uiImage
-//                    return
-//                }
-//            }
-//            do {
-//                let data = try await selection.loadTransferable(type: Data.self)
-//                guard let data, let uiImage = UIImage(data: data) else {
-//                    throw URLError(.badServerResponse)
-//                }
-//                selectedImage = uiImage
-//            } catch {
-//                print(error)
-//            }
-//        }
-//    }
-//}
-//
-//
-//struct SwiftUIView: View {
-//    @StateObject private var viewModel = PhotoPickerViewModel()
-//    
-//    var body: some View {
-//        VStack(spacing: 40) {
-//            
-//            if let image = viewModel.selectedImage {
-//                Image(uiImage: image)
-//                    .resizable()
-//                    .scaledToFill()
-//                    .frame(width: 200, height: 200)
-//                    .cornerRadius(20)
-//            }
-//            PhotosPicker(selection: $viewModel.imageSelection) {
-//                Text("Upload a photo")
-//                    .foregroundColor(.red)
-//            }
-//        }
-//    }
-//}
-//
-//#Preview {
-//    SwiftUIView()
-//}
+
 import SwiftUI
 import PhotosUI
 import UIKit
@@ -83,7 +21,6 @@ final class PhotoPickerViewModel: ObservableObject {
     
     @Published var occasion: String = ""
     @Published var clothingType: String = ""
-    
     @Published var virtualCloset: [ClothingItem] = []
     @Published var selectedOccasionForDressMe: String = ""
     
@@ -120,6 +57,7 @@ final class PhotoPickerViewModel: ObservableObject {
         occasion = ""
         clothingType = ""
     }
+    
     func getRandomItem(for occasion: String) -> ClothingItem? {
         let trimmedOccasion = occasion.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let filteredItems = virtualCloset.filter { $0.occasion.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == trimmedOccasion }
@@ -129,44 +67,56 @@ final class PhotoPickerViewModel: ObservableObject {
 
 struct ClothingItem: Identifiable {
     let id = UUID()
-    let image: UIImage
+    let image: UIImage?
     let occasion: String
     let clothingType: String
 }
-
-import SwiftUI
-import PhotosUI
-import UIKit
-
-import SwiftUI
-import PhotosUI
-import UIKit
 
 struct SwiftUIView: View {
     @StateObject private var viewModel = PhotoPickerViewModel()
     @State private var selectedOccasion: String = ""
     @State private var selectedClothingType: String = ""
     @State private var showSuccessMessage: Bool = false
-    
+
     var body: some View {
-        NavigationView {
+        ZStack {
+            // Full-screen pink background
+            Color(hex: "#FFC0CB")
+                .edgesIgnoringSafeArea(.all)
+
             VStack(spacing: 20) {
+                // Title
+                Text("Update Me")
+                    .font(.custom("Didot-Bold", size: 32)) // Didot font
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color(hex: "#FB607F")) // Updated pink color
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+                    .padding(.top, 40)
+                
                 // Display selected image if available
                 if let image = viewModel.selectedImage {
                     Image(uiImage: image)
                         .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                        .cornerRadius(20)
+                        .scaledToFit()
+                        .frame(width: 150, height: 150) // Reduced size
+                        .cornerRadius(15)
                         .shadow(radius: 10)
-                        .padding(.top, 20)
+                        .padding(.bottom, 20)
+                        .transition(.opacity) // Smooth transition
+                } else {
+                    // Placeholder for image space
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(width: 150, height: 150)
                 }
                 
                 // Occasion dropdown with label
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Text("Select Occasion")
-                        .font(.headline)
-                        .foregroundColor(.pink)
+                        .font(.custom("Didot-Medium", size: 18)) // Didot font
+                        .foregroundColor(Color(hex: "#FB607F")) // Updated pink color
                     
                     Picker("Select Occasion", selection: $selectedOccasion) {
                         Text("Class").tag("Class")
@@ -183,10 +133,10 @@ struct SwiftUIView: View {
                 .padding(.horizontal)
                 
                 // Clothing type dropdown with label
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Text("Select Clothing Type")
-                        .font(.headline)
-                        .foregroundColor(.pink)
+                        .font(.custom("Didot-Medium", size: 18)) // Didot font
+                        .foregroundColor(Color(hex: "#FB607F")) // Updated pink color
                     
                     Picker("Select Clothing Type", selection: $selectedClothingType) {
                         Text("Top").tag("Top")
@@ -203,7 +153,6 @@ struct SwiftUIView: View {
                     .shadow(radius: 5)
                 }
                 .padding(.horizontal)
-                .frame(maxWidth: .infinity, alignment: .center) // Center the dropdown
                 
                 // PhotosPicker for selecting a photo
                 PhotosPicker(selection: $viewModel.imageSelection) {
@@ -214,7 +163,7 @@ struct SwiftUIView: View {
                     }
                     .foregroundColor(.white)
                     .padding()
-                    .background(Color("UploadButtonColor"))
+                    .background(Color(hex: "#FB607F")) // Updated pink color
                     .cornerRadius(10)
                     .shadow(radius: 5)
                 }
@@ -228,9 +177,10 @@ struct SwiftUIView: View {
                     showSuccessMessage = true
                 }) {
                     Text("Upload")
+                        .font(.custom("Didot-Medium", size: 18)) // Didot font
                         .foregroundColor(.white)
                         .padding()
-                        .background(Color.pink)
+                        .background(Color(hex: "#FB607F")) // Updated pink color
                         .cornerRadius(10)
                         .shadow(radius: 5)
                 }
@@ -239,28 +189,27 @@ struct SwiftUIView: View {
                 // Success message
                 if showSuccessMessage {
                     Text("Photo successfully uploaded!")
-                        .font(.subheadline)
+                        .font(.custom("Didot-Regular", size: 16)) // Didot font
                         .foregroundColor(.green)
                         .padding()
+                        .transition(.opacity) // Smooth transition
                 }
                 
                 // Navigation button to Virtual Closet
                 NavigationLink(destination: VirtualClosetView(viewModel: viewModel)) {
                     Text("Go to Virtual Closet")
+                        .font(.custom("Didot-Medium", size: 18)) // Didot font
                         .foregroundColor(.white)
                         .padding()
-                        .background(Color.pink)
+                        .background(Color(hex: "#FB607F")) // Updated pink color
                         .cornerRadius(10)
                         .shadow(radius: 5)
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 20) // Adjust padding to move the button up
             }
             .padding()
-            .background(Color("#FFC0CB")) // Light pink background color
-            .cornerRadius(20)
-            .shadow(radius: 10)
-            .navigationTitle("Upload Photo")
         }
+        .navigationTitle("") // No title here to avoid conflict with custom title
     }
 }
 

@@ -11,7 +11,7 @@ struct DressMeView: View {
     @ObservedObject var viewModel: PhotoPickerViewModel
     @State private var selectedOccasion: String = ""
     @State private var outfit: ClothingItem? = nil
-    
+
     var body: some View {
         VStack(spacing: 20) {
             Text("Dress Me")
@@ -59,9 +59,9 @@ struct DressMeView: View {
             .padding()
             
             // Display selected outfit if available
-            if let outfit = outfit {
+            if let outfit = outfit, let image = outfit.image {
                 VStack(alignment: .leading) {
-                    Image(uiImage: outfit.image)
+                    Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         .frame(height: 200)
@@ -96,7 +96,6 @@ struct DressMeView: View {
         .navigationTitle("Dress Me")
     }
 }
-
 
 #Preview {
     DressMeView(viewModel: PhotoPickerViewModel())
