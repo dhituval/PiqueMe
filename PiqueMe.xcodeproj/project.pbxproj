@@ -14,6 +14,10 @@
 		5A8C31EC2C76737E0018A71F /* PiqueMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8C31EB2C76737E0018A71F /* PiqueMeTests.swift */; };
 		5A8C31F62C76737E0018A71F /* PiqueMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8C31F52C76737E0018A71F /* PiqueMeUITests.swift */; };
 		5A8C31F82C76737E0018A71F /* PiqueMeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8C31F72C76737E0018A71F /* PiqueMeUITestsLaunchTests.swift */; };
+		5A8C32052C7676F00018A71F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8C32042C7676F00018A71F /* SwiftUIView.swift */; };
+		5A8C32072C7682190018A71F /* VirtualClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8C32062C7682190018A71F /* VirtualClosetView.swift */; };
+		5A8C32092C7682FE0018A71F /* DressMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8C32082C7682FE0018A71F /* DressMeView.swift */; };
+		5A8C320B2C7693CF0018A71F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8C320A2C7693CF0018A71F /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +49,10 @@
 		5A8C31F12C76737E0018A71F /* PiqueMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PiqueMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8C31F52C76737E0018A71F /* PiqueMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiqueMeUITests.swift; sourceTree = "<group>"; };
 		5A8C31F72C76737E0018A71F /* PiqueMeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiqueMeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5A8C32042C7676F00018A71F /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		5A8C32062C7682190018A71F /* VirtualClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualClosetView.swift; sourceTree = "<group>"; };
+		5A8C32082C7682FE0018A71F /* DressMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressMeView.swift; sourceTree = "<group>"; };
+		5A8C320A2C7693CF0018A71F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,10 @@
 			children = (
 				5A8C31D92C76737D0018A71F /* PiqueMeApp.swift */,
 				5A8C31DB2C76737D0018A71F /* ContentView.swift */,
+				5A8C32042C7676F00018A71F /* SwiftUIView.swift */,
+				5A8C32062C7682190018A71F /* VirtualClosetView.swift */,
+				5A8C32082C7682FE0018A71F /* DressMeView.swift */,
+				5A8C320A2C7693CF0018A71F /* Colors.swift */,
 				5A8C31DD2C76737E0018A71F /* Assets.xcassets */,
 				5A8C31DF2C76737E0018A71F /* PiqueMe.entitlements */,
 				5A8C31E02C76737E0018A71F /* Preview Content */,
@@ -260,7 +272,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A8C31DC2C76737D0018A71F /* ContentView.swift in Sources */,
+				5A8C320B2C7693CF0018A71F /* Colors.swift in Sources */,
 				5A8C31DA2C76737D0018A71F /* PiqueMeApp.swift in Sources */,
+				5A8C32092C7682FE0018A71F /* DressMeView.swift in Sources */,
+				5A8C32072C7682190018A71F /* VirtualClosetView.swift in Sources */,
+				5A8C32052C7676F00018A71F /* SwiftUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
